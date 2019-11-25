@@ -11,7 +11,7 @@ class NoticeController extends Controller
     //添加公告页面
     public function create_notice_view()
     {
-        //查询所有课程
+        //查询所有课程 /
         $course_info=DB::connection('shixun_2_ku')->table('course')
             ->get()->toArray();
         $course_info=json_decode(json_encode($course_info),true);
