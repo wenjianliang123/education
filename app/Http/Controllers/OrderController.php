@@ -409,4 +409,44 @@ class OrderController extends Controller
         return view('admin/order/course_detail',['course_info'=>$course_info]);
 
     }
+
+
+//查询所有课程
+    public function create_order_and_detail_view()
+    {
+         //查课程
+        $course_info=DB::connection('shixun_2_ku')->table('course')->get()->toarray();
+        $course_info=json_decode(json_encode($course_info),true);
+//        dd($course_info);
+        return view('admin/collect/course_show',['course_info'=>$course_info]);
+   }
+    //添加订单详情表 【概要】
+    public function create_order_and_detail(Request $request)
+    {
+        $data=$request->all();
+        $course_id_arr=$data['course_id_array'];
+        $u_id=$data['u_id'];
+
+        foreach ($course_id_arr as $k => $v)
+        {
+            $insert_data=[
+                'course_id'=>$v,
+                'lecturer_id'=>1,
+                'course_price'=>1,
+                'is_free'=>1,
+                'video'=>1,
+                'create_time'=>time(),
+                'order_id'=>1,
+                'u_id'=>1
+            ];
+            //先不做订单表 先做订单详情
+            $detail_insert=DB::connection('shixun_2_ku')->table('detail')->insert($insert_data);
+            if($detail_insert){
+                echo '111';
+            }else{
+                echo '222';
+            }
+        }
+
+   }
 }

@@ -170,3 +170,8 @@ Route::get('/OrderController/select_teacher_detail/{detail_id}','OrderController
 //订单详情中查看课程详情
 Route::get('/OrderController/select_course_detail/{detail_id}','OrderController@select_course_detail');
 
+
+//老师要求的 订单处理
+Route::get('/OrderController/create_order_and_detail_view','OrderController@create_order_and_detail_view');
+Route::post('/OrderController/create_order_and_detail','OrderController@create_order_and_detail');
+
